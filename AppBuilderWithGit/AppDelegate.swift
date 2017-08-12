@@ -11,6 +11,8 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     
+    private var terminateCancellers: [() -> Bool] = []
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
         guard checkXcode() else {
@@ -42,9 +44,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return true
     }
     
+    func applicationShouldTerminate(_ sender: NSApplication) -> NSApplicationTerminateReply {
+        
+        if terminateCancellers.lazy.map({ $0() }).contains(true) {
+            return .terminateCancel
+        }
+        
+        return .terminateNow
+    }
+    
     var xcodeURL: URL? {
         
         return NSWorkspace.shared().urlForApplication(withBundleIdentifier: "com.apple.dt.xcode")
+    }
+    
+    func registerTerminateCanceller(_ canceller: @escaping () -> Bool) {
+        
+        terminateCancellers.append(canceller)
     }
     
     private func checkXcode() -> Bool {
@@ -60,5 +76,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
     }
+}
+
+extension NSApplication {
+    
+    static var appDelegate: AppDelegate { return shared().delegate as! AppDelegate }
+    
 }
 

@@ -13,6 +13,25 @@ class ViewController: NSViewController {
     @IBOutlet var cloneButton: NSButton!
     @IBOutlet var urlField: NSTextField!
     
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        
+        NSApplication.appDelegate.registerTerminateCanceller { [weak self] in
+            
+            guard let `self` = self else { return true }
+            
+            if self.rawProgress {
+                
+                let alert = NSAlert()
+                alert.messageText = "Stil building"
+                alert.informativeText = "Wait for finish build."
+                alert.runModal()
+            }
+            
+            return self.rawProgress
+        }
+    }
+    
     private dynamic var rawMessage: String = ""
     var message: String = "" {
         
