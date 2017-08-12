@@ -58,6 +58,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         return !terminateCancellers.lazy.map({ $0() }).contains(true)
     }
+    
+    // if canceller return ture, termination is cancel.
     func registerTerminateCanceller(_ canceller: @escaping () -> Bool) {
         
         terminateCancellers.append(canceller)
