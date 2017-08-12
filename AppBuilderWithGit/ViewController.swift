@@ -57,7 +57,32 @@ class ViewController: NSViewController {
         clone()
     }
     
-    private func clone() {
+}
+
+extension ViewController {
+    
+    override func controlTextDidChange(_ obj: Notification) {
+        
+        guard let tx = obj.object as? NSTextField else { return }
+        
+        if let url = URL(string: tx.stringValue),
+            let scheme = url.scheme,
+            (scheme == "git") || (scheme == "http") || (scheme == "https"),
+            let host = url.host, host != "",
+            url.path != "/", url.path != "" {
+            
+            cloneButton.isEnabled = true
+            
+        } else {
+            
+            cloneButton.isEnabled = false
+        }
+    }
+}
+
+extension ViewController {
+    
+    fileprivate func clone() {
         
         guard let url = URL(string: urlField.stringValue)
             else { return }
@@ -124,24 +149,3 @@ class ViewController: NSViewController {
     
 }
 
-
-extension ViewController {
-    
-    override func controlTextDidChange(_ obj: Notification) {
-        
-        guard let tx = obj.object as? NSTextField else { return }
-        
-        if let url = URL(string: tx.stringValue),
-            let scheme = url.scheme,
-            (scheme == "git") || (scheme == "http") || (scheme == "https"),
-            let host = url.host, host != "",
-            url.path != "/", url.path != "" {
-            
-            cloneButton.isEnabled = true
-            
-        } else {
-            
-            cloneButton.isEnabled = false
-        }
-    }
-}
