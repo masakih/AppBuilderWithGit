@@ -46,21 +46,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationShouldTerminate(_ sender: NSApplication) -> NSApplicationTerminateReply {
         
-        if terminateCancellers.lazy.map({ $0() }).contains(true) {
-            return .terminateCancel
+        if canTerminate() {
+            
+            return .terminateNow
         }
         
-        return .terminateNow
+        return .terminateCancel
+    }
+    
+    func canTerminate() -> Bool {
+        
+        return !terminateCancellers.lazy.map({ $0() }).contains(true)
+    }
+    func registerTerminateCanceller(_ canceller: @escaping () -> Bool) {
+        
+        terminateCancellers.append(canceller)
     }
     
     var xcodeURL: URL? {
         
         return NSWorkspace.shared().urlForApplication(withBundleIdentifier: "com.apple.dt.xcode")
-    }
-    
-    func registerTerminateCanceller(_ canceller: @escaping () -> Bool) {
-        
-        terminateCancellers.append(canceller)
     }
     
     private func checkXcode() -> Bool {

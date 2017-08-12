@@ -16,6 +16,7 @@
 		F41A45061F3D83AE0066F83D /* ProjectFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41A45051F3D83AE0066F83D /* ProjectFinder.swift */; };
 		F41A45081F3D98180066F83D /* ProjectBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41A45071F3D98180066F83D /* ProjectBuilder.swift */; };
 		F41A45141F3E9DFA0066F83D /* BuildInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41A45131F3E9DFA0066F83D /* BuildInfo.swift */; };
+		F41A45161F3EC0950066F83D /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41A45151F3EC0950066F83D /* WindowController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		F41A45051F3D83AE0066F83D /* ProjectFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectFinder.swift; sourceTree = "<group>"; };
 		F41A45071F3D98180066F83D /* ProjectBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectBuilder.swift; sourceTree = "<group>"; };
 		F41A45131F3E9DFA0066F83D /* BuildInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildInfo.swift; sourceTree = "<group>"; };
+		F41A45151F3EC0950066F83D /* WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				F41A45011F3D77020066F83D /* ApplicationDirecrories.swift */,
 				F41A44EE1F3D6B1B0066F83D /* AppDelegate.swift */,
 				F41A44F01F3D6B1B0066F83D /* ViewController.swift */,
+				F41A45151F3EC0950066F83D /* WindowController.swift */,
 				F41A45031F3D782A0066F83D /* Git.swift */,
 				F41A45051F3D83AE0066F83D /* ProjectFinder.swift */,
 				F41A45071F3D98180066F83D /* ProjectBuilder.swift */,
@@ -152,6 +155,7 @@
 				F41A45041F3D782A0066F83D /* Git.swift in Sources */,
 				F41A44F11F3D6B1B0066F83D /* ViewController.swift in Sources */,
 				F41A45141F3E9DFA0066F83D /* BuildInfo.swift in Sources */,
+				F41A45161F3EC0950066F83D /* WindowController.swift in Sources */,
 				F41A44EF1F3D6B1B0066F83D /* AppDelegate.swift in Sources */,
 				F41A45061F3D83AE0066F83D /* ProjectFinder.swift in Sources */,
 			);
