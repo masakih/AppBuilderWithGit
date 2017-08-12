@@ -354,7 +354,7 @@
                     <window key="window" title="AppBuilderWithGit" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+                        <rect key="contentRect" x="196" y="240" width="480" height="205"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <connections>
                             <outlet property="delegate" destination="B8D-0N-5wS" id="Myb-1C-j5w"/>
@@ -373,7 +373,7 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="AppBuilderWithGit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="205"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q2r-h8-vNM">
@@ -387,10 +387,10 @@
                                     <action selector="doIt:" target="XfG-lQ-9wD" id="Lyp-7r-Ana"/>
                                 </connections>
                             </button>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZmK-Z6-QnN">
-                                <rect key="frame" x="19" y="13" width="442" height="86"/>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZmK-Z6-QnN">
+                                <rect key="frame" x="18" y="20" width="444" height="86"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Multiline Label" id="zeh-Ow-tvT">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" borderStyle="bezel" title="Multiline Label" id="zeh-Ow-tvT">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -399,15 +399,8 @@
                                     <binding destination="XfG-lQ-9wD" name="value" keyPath="rawMessage" id="vWM-e4-nvG"/>
                                 </connections>
                             </textField>
-                            <progressIndicator wantsLayer="YES" fixedFrame="YES" maxValue="100" displayedWhenStopped="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="hAS-R5-vAn">
-                                <rect key="frame" x="224" y="174" width="32" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
-                                <connections>
-                                    <binding destination="XfG-lQ-9wD" name="animate" keyPath="rawProgress" id="gx2-Pj-KiU"/>
-                                </connections>
-                            </progressIndicator>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFi-MS-cxt">
-                                <rect key="frame" x="20" y="228" width="94" height="17"/>
+                                <rect key="frame" x="18" y="168" width="94" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Git Repository:" id="sUl-YY-FrT">
                                     <font key="font" metaFont="system"/>
@@ -416,7 +409,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xBg-57-cN9">
-                                <rect key="frame" x="120" y="225" width="340" height="22"/>
+                                <rect key="frame" x="118" y="166" width="342" height="22"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="hF6-qG-1Di">
                                     <font key="font" metaFont="system"/>
@@ -432,6 +425,13 @@
                                     <outlet property="delegate" destination="XfG-lQ-9wD" id="waq-y2-V2A"/>
                                 </connections>
                             </textField>
+                            <progressIndicator wantsLayer="YES" fixedFrame="YES" maxValue="100" displayedWhenStopped="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="hAS-R5-vAn">
+                                <rect key="frame" x="49" y="119" width="32" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                <connections>
+                                    <binding destination="XfG-lQ-9wD" name="animate" keyPath="rawProgress" id="gx2-Pj-KiU"/>
+                                </connections>
+                            </progressIndicator>
                         </subviews>
                     </view>
                     <connections>
@@ -442,7 +442,7 @@
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="pU4-iL-MSk"/>
             </objects>
-            <point key="canvasLocation" x="237" y="618"/>
+            <point key="canvasLocation" x="237" y="585.5"/>
         </scene>
     </scenes>
 </document>
