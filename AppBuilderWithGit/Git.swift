@@ -71,7 +71,7 @@ final class Git {
     private func excuteGit(workingURL: URL, args: [String]) throws {
         
         let xcodeURL = NSApplication.appDelegate.xcodeURL
-        guard let builderURL = xcodeURL?.appendingPathComponent("/Contents/Developer/usr/bin/git") else {
+        guard let gitURL = xcodeURL?.appendingPathComponent("/Contents/Developer/usr/bin/git") else {
             
             throw GitError.other("git is not found.")
         }
@@ -83,7 +83,7 @@ final class Git {
         }
         
         let git = Process()
-        git.launchPath = builderURL.path
+        git.launchPath = gitURL.path
         git.arguments = args
         
         git.currentDirectoryPath = workingURL.path
