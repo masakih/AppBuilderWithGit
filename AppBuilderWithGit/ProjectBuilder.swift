@@ -37,7 +37,7 @@ final class ProjectBuilder {
     
     func build() throws {
         
-        let xcodeURL = (NSApplication.shared().delegate as! AppDelegate).xcodeURL
+        let xcodeURL = NSApplication.appDelegate.xcodeURL
         guard let builderURL = xcodeURL?.appendingPathComponent("/Contents/Developer/usr/bin/xcodebuild") else {
             
             throw ProjectBuilderError.commandNotFound
