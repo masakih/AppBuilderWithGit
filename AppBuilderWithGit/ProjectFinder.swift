@@ -16,34 +16,31 @@ final class ProjectFinder {
         guard depth != 0 else { return nil }
         
         guard let contents = try? FileManager.default.contentsOfDirectory(at: url,
-                                                               includingPropertiesForKeys: [.isDirectoryKey])
+                                                                          includingPropertiesForKeys: [.isDirectoryKey])
             else {
                 return nil
         }
         
-        if let url = contents.filter({ $0.pathExtension == "xcworkspace" }).first {
+        if let url = contents.lazy.filter({ $0.pathExtension == "xcworkspace" }).first {
             
             return url
         }
         
-        if let url = contents.filter({ $0.pathExtension == "xcodeproj" }).first {
+        if let url = contents.lazy.filter({ $0.pathExtension == "xcodeproj" }).first {
             
             return url
         }
         
         
-        let dirs = contents.filter {
-            let att = try? $0.resourceValues(forKeys: [.isDirectoryKey])
-            return att?.isDirectory ?? false
-        }
-        for d in dirs {
+        func isDir(_ url: URL) -> Bool {
             
-            if let u = find(in: d, depth: depth - 1) {
-                
-                return u
-            }
+            return (try? url.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory ?? false
         }
         
-        return nil
+        return contents.lazy
+            .filter(isDir)
+            .flatMap { find(in: $0, depth: depth - 1) }
+            .first
+        
     }
 }
