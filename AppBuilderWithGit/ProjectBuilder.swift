@@ -57,7 +57,7 @@ final class ProjectBuilder {
         let pipe = Pipe()
         xcodebuild.standardOutput = pipe
         
-        var token: NSObjectProtocol!
+        weak var token: NSObjectProtocol?
         token = NotificationCenter.default
             .addObserver(forName: FileHandle.readCompletionNotification,
                          object: pipe.fileHandleForReading,
@@ -78,7 +78,7 @@ final class ProjectBuilder {
                                 
                             } else {
                                 
-                                NotificationCenter.default.removeObserver(token)
+                                token.map(NotificationCenter.default.removeObserver)
                             }
                             
         }
