@@ -14,11 +14,12 @@ class ViewController: NSViewController {
     @IBOutlet var urlField: NSTextField!
     
     required init?(coder: NSCoder) {
+        
         super.init(coder: coder)
         
         NSApplication.appDelegate.registerTerminateCanceller { [weak self] in
             
-            guard let `self` = self else { return true }
+            guard let `self` = self else { return false }
             
             if self.rawProgress {
                 
