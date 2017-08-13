@@ -8,28 +8,26 @@
 
 import Foundation
 
-
-enum ProjectType {
+struct BuildInfo {
     
-    case xcodeproj
-    
-    case xcworkspace
-    
-    init?(projectFileURL: URL) {
+    private enum ProjectType {
         
-        switch projectFileURL.pathExtension {
+        case xcodeproj
+        
+        case xcworkspace
+        
+        init?(projectFileURL: URL) {
             
-        case "xcodeproj": self = .xcodeproj
-            
-        case "xcworkspace": self = .xcworkspace
-            
-        default: return nil
+            switch projectFileURL.pathExtension {
+                
+            case "xcodeproj": self = .xcodeproj
+                
+            case "xcworkspace": self = .xcworkspace
+                
+            default: return nil
+            }
         }
     }
-}
-
-
-struct BuildInfo {
     
     private static let buildDir = "Build"
     
