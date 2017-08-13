@@ -41,7 +41,7 @@ final class Git {
             
             try clone()
             
-            try submoduleUpdate(shuldInit: true)
+            try submoduleUpdate(shouldInit: true)
             
             completeHandler?(GitError.none)
             
@@ -112,30 +112,22 @@ final class Git {
             throw GitError.other("URL is invalid.")
         }
         
-        let args = ["clone", url.absoluteString, repositoryName]
-        
         let workingURL = ApplicationDirecrories.support
         guard checkDirectory(workingURL) else {
             
-            throw GitError.other("App Suport Directory is invalid.")
+            throw GitError.other("App Support Directory is invalid.")
         }
+        
+        let args = ["clone", url.absoluteString, repositoryName]
         
         try excuteGit(workingURL: workingURL, args: args)
     }
     
-    private func submoduleUpdate(shuldInit: Bool = false) throws {
+    private func submoduleUpdate(shouldInit: Bool = false) throws {
         
         let workingURL = ApplicationDirecrories.support.appendingPathComponent(repositoryName)
         
-        let args: [String] = {
-            if shuldInit {
-                
-                return ["submodule", "update", "-i"]
-            } else {
-                
-                return ["submodule", "update"]
-            }
-        }()
+        let args = shouldInit ? ["submodule", "update", "-i"] : ["submodule", "update"]
         
         try excuteGit(workingURL: workingURL, args: args)
     }
@@ -162,6 +154,7 @@ final class Git {
         } catch {
             
             switch error {
+                
             case let e as GitError: completeHandler?(e)
                 
             default: completeHandler?(GitError.other("Unknown Error: \(error)"))
