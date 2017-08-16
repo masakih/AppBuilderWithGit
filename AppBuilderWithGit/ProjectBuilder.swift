@@ -56,34 +56,9 @@ final class ProjectBuilder {
         
         let pipe = Pipe()
         xcodebuild.standardOutput = pipe
-        
-        weak var token: NSObjectProtocol?
-        token = NotificationCenter.default
-            .addObserver(forName: FileHandle.readCompletionNotification,
-                         object: pipe.fileHandleForReading,
-                         queue: nil) { [weak xcodebuild] notifiction in
-                            
-                            if let data = notifiction.userInfo?[NSFileHandleNotificationDataItem] as? Data,
-                                let string = String(data: data, encoding: .utf8) {
-                                
-                                print(string)
-                                
-                            }
-                            
-                            if let task = xcodebuild,
-                                task.isRunning,
-                                let handle = notifiction.object as? FileHandle {
-                                
-                                handle.readInBackgroundAndNotify()
-                                
-                            } else {
-                                
-                                token.map(NotificationCenter.default.removeObserver)
-                            }
-                            
-        }
-        
-        pipe.fileHandleForReading.readInBackgroundAndNotify()
+        xcodebuild.standardError = pipe
+        let log = LogStocker("xcodebuild.log")
+        log?.read(pipe.fileHandleForReading)
         
         xcodebuild.launch()
         xcodebuild.waitUntilExit()

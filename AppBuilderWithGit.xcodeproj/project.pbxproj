@@ -17,6 +17,7 @@
 		F41A45081F3D98180066F83D /* ProjectBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41A45071F3D98180066F83D /* ProjectBuilder.swift */; };
 		F41A45141F3E9DFA0066F83D /* BuildInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41A45131F3E9DFA0066F83D /* BuildInfo.swift */; };
 		F41A45161F3EC0950066F83D /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41A45151F3EC0950066F83D /* WindowController.swift */; };
+		F41A45181F401D4B0066F83D /* LogStocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41A45171F401D4B0066F83D /* LogStocker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		F41A45071F3D98180066F83D /* ProjectBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectBuilder.swift; sourceTree = "<group>"; };
 		F41A45131F3E9DFA0066F83D /* BuildInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildInfo.swift; sourceTree = "<group>"; };
 		F41A45151F3EC0950066F83D /* WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
+		F41A45171F401D4B0066F83D /* LogStocker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogStocker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 				F41A45031F3D782A0066F83D /* Git.swift */,
 				F41A45051F3D83AE0066F83D /* ProjectFinder.swift */,
 				F41A45071F3D98180066F83D /* ProjectBuilder.swift */,
+				F41A45171F401D4B0066F83D /* LogStocker.swift */,
 				F41A45131F3E9DFA0066F83D /* BuildInfo.swift */,
 				F41A44F21F3D6B1B0066F83D /* Assets.xcassets */,
 				F41A44F41F3D6B1B0066F83D /* Main.storyboard */,
@@ -150,6 +153,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F41A45181F401D4B0066F83D /* LogStocker.swift in Sources */,
 				F41A45021F3D77020066F83D /* ApplicationDirecrories.swift in Sources */,
 				F41A45081F3D98180066F83D /* ProjectBuilder.swift in Sources */,
 				F41A45041F3D782A0066F83D /* Git.swift in Sources */,

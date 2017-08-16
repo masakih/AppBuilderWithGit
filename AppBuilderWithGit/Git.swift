@@ -70,6 +70,11 @@ final class Git {
     
     private func excuteGit(workingURL: URL, args: [String]) throws {
         
+        guard !args.isEmpty else {
+            
+            throw GitError.other("Iligal arguments")
+        }
+        
         let xcodeURL = NSApplication.appDelegate.xcodeURL
         guard let gitURL = xcodeURL?.appendingPathComponent("/Contents/Developer/usr/bin/git") else {
             
@@ -90,6 +95,12 @@ final class Git {
         
         let pipe = Pipe()
         git.standardError = pipe
+        
+        let logPipe = Pipe()
+        git.standardOutput = logPipe
+        git.standardError = logPipe
+        let log = LogStocker("git-" + args[0] + ".log")
+        log?.read(logPipe.fileHandleForReading)
         
         git.launch()
         git.waitUntilExit()
