@@ -81,3 +81,16 @@ func >>> <T>(lhs: Process, rhs: (Output) -> T) -> T {
     return rhs(Output(fileHandle: pipe.fileHandleForReading))
 }
 
+func >>> <T>(lhs: Process, rhs: (Output, Output) -> T) -> T {
+    
+    let pipe = Pipe()
+    lhs.standardOutput = pipe
+    
+    let err = Pipe()
+    lhs.standardError = err
+    
+    lhs.launch()
+    
+    return rhs(Output(fileHandle: pipe.fileHandleForReading), Output(fileHandle: err.fileHandleForReading))
+}
+
