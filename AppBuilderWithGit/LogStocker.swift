@@ -63,4 +63,12 @@ final class LogStocker {
         
     }
     
+    func write(_ data: Data) {
+        
+        DispatchQueue.global().async {
+            
+            self.output.write(data)
+        }
+    }
+    
 }
