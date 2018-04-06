@@ -87,30 +87,26 @@ final class Git {
             throw GitError.other("URL is invalid")
         }
         
-        let git = Process()
-        git.launchPath = gitURL.path
-        git.arguments = args
+        let git = Process() <<< gitURL.path <<< args
         
         git.currentDirectoryPath = workingURL.path
         
-        let pipe = Pipe()
-        git.standardError = pipe
+        let errorString = git >>> { (stdout, stderr) -> String in
+            
+            let log = LogStocker("git-" + args[0] + ".log")
+            log?.write(stdout.data)
+            
+            let errorString = stderr.string
+            errorString.map { log?.write($0) }
+            
+            return errorString ?? ""
+        }
         
-        let logPipe = Pipe()
-        git.standardOutput = logPipe
-        git.standardError = logPipe
-        let log = LogStocker("git-" + args[0] + ".log")
-        log?.read(logPipe.fileHandleForReading)
-        
-        git.launch()
         git.waitUntilExit()
         
         guard git.terminationStatus == 0 else {
             
-            let data = pipe.fileHandleForReading.readDataToEndOfFile()
-            let string = String(data: data, encoding: .utf8) ?? ""
-            
-            throw GitError.gitError(git.terminationStatus, string)
+            throw GitError.gitError(git.terminationStatus, errorString)
         }
         
     }
