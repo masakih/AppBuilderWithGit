@@ -71,4 +71,12 @@ final class LogStocker {
         }
     }
     
+    func write(_ string: String) {
+        
+        DispatchQueue.global().async {
+            
+            self.output.write(string.data(using: .utf8) ?? Data())
+        }
+    }
+    
 }
