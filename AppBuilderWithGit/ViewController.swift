@@ -55,7 +55,12 @@ class ViewController: NSViewController {
     
     @IBAction func doIt(_ sender: Any?) {
         
-        clone()
+        cloneButton.isEnabled = false
+        clone {
+            DispatchQueue.main.async {
+                self.cloneButton.isEnabled = true
+            }
+        }
     }
     
 }
@@ -83,21 +88,17 @@ extension ViewController {
 
 extension ViewController {
     
-    fileprivate func clone() {
+    fileprivate func clone(completionHandler: @escaping () -> Void) {
         
         guard let url = URL(string: urlField.stringValue)
             else { return }
-        
-        cloneButton.isEnabled = false
         
         DispatchQueue(label: "MMMMM", attributes: .concurrent).async {
             
             self.progress = true
             defer {
                 self.progress = false
-                DispatchQueue.main.async {
-                    self.cloneButton.isEnabled = true
-                }
+                completionHandler()
             }
             
             let gitCloner = Git(url)
