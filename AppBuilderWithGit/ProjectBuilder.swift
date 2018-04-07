@@ -49,18 +49,15 @@ final class ProjectBuilder {
                 throw ProjectBuilderError.other("URL is Invalid.")
         }
         
-        let xcodebuild = Process()
-        xcodebuild.launchPath = builderURL.path
-        xcodebuild.arguments = info.arguments
+        let xcodebuild = Process() <<< builderURL.path <<< info.arguments
         xcodebuild.currentDirectoryPath = info.projectURL.path
+        xcodebuild >>> { stdout, stderr in
+            
+            let log = LogStocker("xcodebuild.log")
+            log?.write(stdout.data)
+            log?.write(stderr.data)
+        }
         
-        let pipe = Pipe()
-        xcodebuild.standardOutput = pipe
-        xcodebuild.standardError = pipe
-        let log = LogStocker("xcodebuild.log")
-        log?.read(pipe.fileHandleForReading)
-        
-        xcodebuild.launch()
         xcodebuild.waitUntilExit()
         
         guard xcodebuild.terminationStatus == 0
