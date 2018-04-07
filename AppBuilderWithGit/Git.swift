@@ -139,7 +139,7 @@ final class Git {
         try excuteGit(workingURL: workingURL, args: args)
     }
     
-    private func pul() throws {
+    private func pull() throws {
         
         let workingURL = ApplicationDirecrories.support.appendingPathComponent(repositoryName)
         
@@ -152,7 +152,7 @@ final class Git {
     
         do {
             
-            try pul()
+            try pull()
             
             try submoduleUpdate()
             
