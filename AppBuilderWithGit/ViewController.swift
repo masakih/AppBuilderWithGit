@@ -129,9 +129,16 @@ extension ViewController {
     
     private func carthage(_ url: URL) {
         
-        self.message = "Checking Carthage"
+        message = "Checking Carthage."
         
         let carthage = Carthage(url)
+        
+        guard carthage.checkCarthage() else {
+            
+            return
+        }
+        
+        message = "Building frameworks with Carthage."
         
         carthage.execute()
     }
@@ -141,10 +148,10 @@ extension ViewController {
         message = "Building Project."
         
         do {
-            guard let builder = ProjectBuilder(url)
-                else {
-                    message = "Fail build because project file is not found."
-                    return
+            guard let builder = ProjectBuilder(url) else {
+                
+                message = "Fail build because project file is not found."
+                return
             }
             
             try builder.build()
