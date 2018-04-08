@@ -39,6 +39,12 @@ class AppBuilderWithGitTests: XCTestCase {
         XCTAssertFalse("Hoge.xcodeproj.copy".match("\\w*\\.xcodeproj$"))
         
         XCTAssertFalse(".xcodeproj.copy".match("\\w*\\.xcodeproj$"))
+        
+        
+        XCTAssertTrue("Cartfile".match("^Cartfile$"))
+        XCTAssertFalse("hogeCartfile".match("^Cartfile$"))
+        XCTAssertFalse("Cartfilehoge".match("^Cartfile$"))
+
     }
     
     

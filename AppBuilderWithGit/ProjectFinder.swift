@@ -33,7 +33,7 @@ func findFile(pattern: String, in url: URL, depth: Int = 1) -> URL? {
             return nil
     }
     
-    if let url = contents.lazy.filter({ $0.path.match(pattern) }).first {
+    if let url = contents.lazy.filter({ $0.lastPathComponent.match(pattern) }).first {
         
         return url
     }
