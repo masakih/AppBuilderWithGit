@@ -21,7 +21,7 @@ final class Carthage {
     
     func execute() {
         
-        guard findFile(pattern: "Cartfile$", in: baseURL) != nil else {
+        guard let cartfile = findFile(pattern: "Cartfile$", in: baseURL) else {
             
             print("Cartfile notFound")
             return
@@ -35,7 +35,7 @@ final class Carthage {
         print("carthage", carthageURL)
         
         let carthage = Process() <<< carthageURL.path <<< ["update"]
-        carthage.currentDirectoryPath = baseURL.path
+        carthage.currentDirectoryPath = cartfile.deletingLastPathComponent().path
         
         carthage.launch()
         carthage.waitUntilExit()
