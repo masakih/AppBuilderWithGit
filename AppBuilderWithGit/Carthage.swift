@@ -19,7 +19,7 @@ final class Carthage {
     
     private var cartfileURL: URL? {
         
-        return findFile(pattern: "Cartfile$", in: baseURL)
+        return findFile(pattern: "Cartfile$", in: baseURL, depth: 2)
     }
     
     private var carthageURL: URL? {
