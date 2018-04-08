@@ -34,4 +34,18 @@ class AppBuilderWithGitTests: XCTestCase {
         
         XCTAssertFalse(".xcodeproj.copy".match("\\w*\\.xcodeproj$"))
     }
+    
+    
+    func testFileFinder() {
+        
+        let bundleURL = Bundle.main.bundleURL
+        
+        XCTAssertNotNil(findFile(pattern: "Contents", in: bundleURL))
+        
+        XCTAssertNotNil(findFile(pattern: "PkgInfo", in: bundleURL, depth: 3))
+        
+        XCTAssertNil(findFile(pattern: "pkgInfo", in: bundleURL, depth: 3))
+
+        
+    }
 }

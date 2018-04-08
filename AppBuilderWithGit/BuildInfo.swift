@@ -39,7 +39,7 @@ struct BuildInfo {
     
     init?(projectURL: URL) {
         
-        guard let projectFileURL = ProjectFinder.find(in: projectURL)
+        guard let projectFileURL = find(in: projectURL)
             else { return nil }
         
         self.projectURL = projectURL
