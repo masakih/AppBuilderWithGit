@@ -27,7 +27,10 @@ final class ProjectBuilder {
     
     init?(_ url: URL) {
         
-        guard let info = BuildInfo(projectURL: url) else { return nil }
+        guard let info = BuildInfo(projectURL: url) else {
+            
+            return nil
+        }
         
         self.info = info
         
@@ -60,10 +63,9 @@ final class ProjectBuilder {
         
         xcodebuild.waitUntilExit()
         
-        guard xcodebuild.terminationStatus == 0
-            else {
-                
-                throw ProjectBuilderError.commandFail
+        guard xcodebuild.terminationStatus == 0 else {
+            
+            throw ProjectBuilderError.commandFail
         }
     }
 
