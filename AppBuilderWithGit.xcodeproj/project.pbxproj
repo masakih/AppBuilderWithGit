@@ -21,6 +21,7 @@
 		F4DDB3B42077BB41004781AE /* CommandFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DDB3B32077BB41004781AE /* CommandFinder.swift */; };
 		F4DDB3B62077BBB2004781AE /* Process-extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DDB3B52077BBB2004781AE /* Process-extensions.swift */; };
 		F4DDB3BE2077BD2B004781AE /* AppBuilderWithGitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DDB3BD2077BD2B004781AE /* AppBuilderWithGitTests.swift */; };
+		F4DDB3C82079A209004781AE /* Carthage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DDB3C72079A209004781AE /* Carthage.swift */; };
 		F4DDB3CA2079A3DB004781AE /* String-extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DDB3C92079A3DB004781AE /* String-extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		F4DDB3BB2077BD2B004781AE /* AppBuilderWithGitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppBuilderWithGitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4DDB3BD2077BD2B004781AE /* AppBuilderWithGitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBuilderWithGitTests.swift; sourceTree = "<group>"; };
 		F4DDB3BF2077BD2B004781AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F4DDB3C72079A209004781AE /* Carthage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carthage.swift; sourceTree = "<group>"; };
 		F4DDB3C92079A3DB004781AE /* String-extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -96,17 +98,18 @@
 			isa = PBXGroup;
 			children = (
 				F41A45011F3D77020066F83D /* ApplicationDirecrories.swift */,
+				F4DDB3B32077BB41004781AE /* CommandFinder.swift */,
+				F41A45171F401D4B0066F83D /* LogStocker.swift */,
+				F4DDB3B52077BBB2004781AE /* Process-extensions.swift */,
 				F41A44EE1F3D6B1B0066F83D /* AppDelegate.swift */,
 				F41A44F01F3D6B1B0066F83D /* ViewController.swift */,
 				F41A45151F3EC0950066F83D /* WindowController.swift */,
 				F41A45031F3D782A0066F83D /* Git.swift */,
-				F4DDB3B32077BB41004781AE /* CommandFinder.swift */,
-				F4DDB3B52077BBB2004781AE /* Process-extensions.swift */,
-				F41A45051F3D83AE0066F83D /* ProjectFinder.swift */,
 				F41A45071F3D98180066F83D /* ProjectBuilder.swift */,
-				F41A45171F401D4B0066F83D /* LogStocker.swift */,
 				F41A45131F3E9DFA0066F83D /* BuildInfo.swift */,
+				F41A45051F3D83AE0066F83D /* ProjectFinder.swift */,
 				F4DDB3C92079A3DB004781AE /* String-extensions.swift */,
+				F4DDB3C72079A209004781AE /* Carthage.swift */,
 				F41A44F21F3D6B1B0066F83D /* Assets.xcassets */,
 				F41A44F41F3D6B1B0066F83D /* Main.storyboard */,
 				F41A44F71F3D6B1B0066F83D /* Info.plist */,
@@ -234,6 +237,7 @@
 				F4DDB3CA2079A3DB004781AE /* String-extensions.swift in Sources */,
 				F41A44F11F3D6B1B0066F83D /* ViewController.swift in Sources */,
 				F41A45141F3E9DFA0066F83D /* BuildInfo.swift in Sources */,
+				F4DDB3C82079A209004781AE /* Carthage.swift in Sources */,
 				F41A45161F3EC0950066F83D /* WindowController.swift in Sources */,
 				F41A44EF1F3D6B1B0066F83D /* AppDelegate.swift in Sources */,
 				F41A45061F3D83AE0066F83D /* ProjectFinder.swift in Sources */,
