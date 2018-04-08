@@ -10,26 +10,37 @@ import Foundation
 
 func existCommand(_ commandName: String) -> Bool {
     
-    return Process() <<< "/usr/bin/which" <<< [commandName]
-        >>> { output in output.lines.count == 2 }
+    let which = Process() <<< "/usr/bin/which" <<< [commandName]
+    
+    if let currentPath = which.environment?["PATH"] {
+        
+        which.environment!["PATH"] = "/usr/local/bin/:" + currentPath
+        
+    } else {
+        
+        which.environment = ["PATH": "/bin:/sbin:/local/bin:/local/sbin:/usr/local/bin"]
+    }
+    
+    return which >>> { output in output.lines.count == 2 }
 }
 
 func commandPath(_ commandName: String) -> URL? {
     
     let which = Process() <<< "/usr/bin/which" <<< [commandName]
+    
     if let currentPath = which.environment?["PATH"] {
         
-        print(currentPath)
         which.environment!["PATH"] = "/usr/local/bin/:" + currentPath
+        
     } else {
+        
         which.environment = ["PATH": "/bin:/sbin:/local/bin:/local/sbin:/usr/local/bin"]
     }
+    
     return which >>> { (output: Output) -> URL? in
             
             let lines = output.lines
-            
-            print(lines)
-            
+        
             guard let path = lines.first else {
                 return nil
             }
