@@ -19,4 +19,19 @@ class AppBuilderWithGitTests: XCTestCase {
         XCTAssertFalse(existCommand("skjdlfkjsaldfjalkj"))
     }
     
+    
+    func testMatch() {
+        
+        XCTAssertTrue("hogehogehoge".match("hoge"))
+        
+        XCTAssertTrue("abcdefg".match("\\w*"))
+        
+        XCTAssertTrue("1234567890".match("\\w*"))
+        
+        XCTAssertTrue("Hoge.xcodeproj".match("\\w*\\.xcodeproj$"))
+        
+        XCTAssertFalse("Hoge.xcodeproj.copy".match("\\w*\\.xcodeproj$"))
+        
+        XCTAssertFalse(".xcodeproj.copy".match("\\w*\\.xcodeproj$"))
+    }
 }
