@@ -14,7 +14,8 @@ class AppBuilderWithGitTests: XCTestCase {
     
     func testExistCommand() {
         
-        XCTAssertTrue(existCommand("git"))
+        XCTAssertTrue(existCommand("carthage"))
+        XCTAssertTrue(existCommand("pod"))
         
         XCTAssertFalse(existCommand("skjdlfkjsaldfjalkj"))
     }
