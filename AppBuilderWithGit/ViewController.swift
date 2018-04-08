@@ -112,7 +112,10 @@ extension ViewController {
                 case .none:
                     self.message = "Finish cloning"
                     
-                    self.carthage(gitCloner.repository)
+                    guard self.carthage(gitCloner.repository) else {
+                        
+                        return
+                    }
                     
                     self.build(gitCloner.repository)
                     
@@ -127,20 +130,31 @@ extension ViewController {
         }
     }
     
-    private func carthage(_ url: URL) {
+    private func carthage(_ url: URL) -> Bool {
         
         message = "Checking Carthage."
         
-        let carthage = Carthage(url)
-        
-        guard carthage.checkCarthage() else {
+        do {
             
-            return
+            let carthage = Carthage(url)
+            
+            guard carthage.checkCarthage() else {
+                
+                return true
+            }
+            
+            message = "Building frameworks with Carthage."
+            
+            try carthage.execute()
+            
+            return true
+            
+        } catch {
+            
+            message = "Fail to carthage."
+            
+            return false
         }
-        
-        message = "Building frameworks with Carthage."
-        
-        carthage.execute()
     }
     
     private func build(_ url: URL) {

@@ -8,6 +8,13 @@
 
 import Foundation
 
+enum CarthageError: Error {
+    
+    case commandNotFound
+    
+    case commandFail
+}
+
 final class Carthage {
     
     let baseURL: URL
@@ -42,7 +49,7 @@ final class Carthage {
         return true
     }
     
-    func execute() {
+    func execute() throws {
         
         guard let cartfile = cartfileURL else {
             
@@ -51,15 +58,15 @@ final class Carthage {
         
         guard let carthageURL = carthageURL else {
             
-            return
+            throw CarthageError.commandNotFound
         }
-        
-        let log = LogStocker("carthage.log")
         
         let carthage = Process() <<< carthageURL.path <<< ["update"]
         carthage.currentDirectoryPath = cartfile.deletingLastPathComponent().path
         
         carthage >>> { output, error in
+            
+            let log = LogStocker("carthage.log")
             log?.write(output.data)
             log?.write(error.data)
         }
@@ -67,7 +74,7 @@ final class Carthage {
         
         if carthage.terminationStatus != 0 {
             
-            log?.write("Carthage error exit with status \(carthage.terminationStatus)")
+            throw CarthageError.commandFail
         }
     }
 }
