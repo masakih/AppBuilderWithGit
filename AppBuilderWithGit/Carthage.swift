@@ -54,7 +54,7 @@ final class Carthage {
             return
         }
         
-        let log = LogStocker("carthage")
+        let log = LogStocker("carthage.log")
         
         let carthage = Process() <<< carthageURL.path <<< ["update"]
         carthage.currentDirectoryPath = cartfile.deletingLastPathComponent().path
