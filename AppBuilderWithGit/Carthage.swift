@@ -15,34 +15,59 @@ final class Carthage {
     init(_ url: URL) {
         
         self.baseURL = url
+    }
+    
+    private var cartfileURL: URL? {
         
-        print("setting base url is", baseURL)
+        return findFile(pattern: "Cartfile$", in: baseURL)
+    }
+    
+    private var carthageURL: URL? {
+        
+        return commandPath("carthage")
+    }
+    
+    func checkCarthage() -> Bool {
+        
+        guard cartfileURL != nil else {
+            
+            return false
+        }
+        
+        guard carthageURL != nil else {
+            
+            return false
+        }
+        
+        return true
     }
     
     func execute() {
         
-        guard let cartfile = findFile(pattern: "Cartfile$", in: baseURL) else {
+        guard let cartfile = cartfileURL else {
             
-            print("Cartfile notFound")
             return
         }
         
-        guard let carthageURL = commandPath("carthage") else {
+        guard let carthageURL = carthageURL else {
             
-            print("carthage not found")
             return
         }
-        print("carthage", carthageURL)
+        
+        let log = LogStocker("carthage")
         
         let carthage = Process() <<< carthageURL.path <<< ["update"]
         carthage.currentDirectoryPath = cartfile.deletingLastPathComponent().path
         
-        carthage.launch()
+        carthage >>> { output, error in
+            log?.write(output.data)
+            log?.write(error.data)
+        }
         carthage.waitUntilExit()
         
         if carthage.terminationStatus != 0 {
             
-            print("Carthage error")
+            log?.write("Carthage error exit with status \(carthage.terminationStatus)")
         }
     }
 }
