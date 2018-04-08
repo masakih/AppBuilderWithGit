@@ -117,6 +117,11 @@ extension ViewController {
                         return
                     }
                     
+                    guard self.cocoaPods(gitCloner.repository) else {
+                        
+                        return
+                    }
+                    
                     self.build(gitCloner.repository)
                     
                 case let .gitError(stat, mess):
@@ -152,6 +157,33 @@ extension ViewController {
         } catch {
             
             message = "Fail to carthage."
+            
+            return false
+        }
+    }
+    
+    private func cocoaPods(_ url: URL) -> Bool {
+        
+        message = "Checking CocoaPods."
+        
+        do {
+            
+            let pod = CocoaPods(url)
+            
+            guard pod.checkCocoaPods() else {
+                
+                return true
+            }
+            
+            message = "Building frameworks with CocoaPods."
+            
+            try pod.execute()
+            
+            return true
+            
+        } catch {
+            
+            message = "Fail to CocoaPods."
             
             return false
         }

@@ -18,6 +18,7 @@
 		F41A45141F3E9DFA0066F83D /* BuildInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41A45131F3E9DFA0066F83D /* BuildInfo.swift */; };
 		F41A45161F3EC0950066F83D /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41A45151F3EC0950066F83D /* WindowController.swift */; };
 		F41A45181F401D4B0066F83D /* LogStocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41A45171F401D4B0066F83D /* LogStocker.swift */; };
+		F45853192079DDBE007B251A /* CocoaPods.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45853182079DDBE007B251A /* CocoaPods.swift */; };
 		F4DDB3B42077BB41004781AE /* CommandFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DDB3B32077BB41004781AE /* CommandFinder.swift */; };
 		F4DDB3B62077BBB2004781AE /* Process-extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DDB3B52077BBB2004781AE /* Process-extensions.swift */; };
 		F4DDB3BE2077BD2B004781AE /* AppBuilderWithGitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DDB3BD2077BD2B004781AE /* AppBuilderWithGitTests.swift */; };
@@ -49,6 +50,7 @@
 		F41A45131F3E9DFA0066F83D /* BuildInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildInfo.swift; sourceTree = "<group>"; };
 		F41A45151F3EC0950066F83D /* WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 		F41A45171F401D4B0066F83D /* LogStocker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogStocker.swift; sourceTree = "<group>"; };
+		F45853182079DDBE007B251A /* CocoaPods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocoaPods.swift; sourceTree = "<group>"; };
 		F4DDB3B32077BB41004781AE /* CommandFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandFinder.swift; sourceTree = "<group>"; };
 		F4DDB3B52077BBB2004781AE /* Process-extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Process-extensions.swift"; sourceTree = "<group>"; };
 		F4DDB3BB2077BD2B004781AE /* AppBuilderWithGitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppBuilderWithGitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,6 +112,7 @@
 				F41A45051F3D83AE0066F83D /* ProjectFinder.swift */,
 				F4DDB3C92079A3DB004781AE /* String-extensions.swift */,
 				F4DDB3C72079A209004781AE /* Carthage.swift */,
+				F45853182079DDBE007B251A /* CocoaPods.swift */,
 				F41A44F21F3D6B1B0066F83D /* Assets.xcassets */,
 				F41A44F41F3D6B1B0066F83D /* Main.storyboard */,
 				F41A44F71F3D6B1B0066F83D /* Info.plist */,
@@ -235,6 +238,7 @@
 				F4DDB3B62077BBB2004781AE /* Process-extensions.swift in Sources */,
 				F41A45041F3D782A0066F83D /* Git.swift in Sources */,
 				F4DDB3CA2079A3DB004781AE /* String-extensions.swift in Sources */,
+				F45853192079DDBE007B251A /* CocoaPods.swift in Sources */,
 				F41A44F11F3D6B1B0066F83D /* ViewController.swift in Sources */,
 				F41A45141F3E9DFA0066F83D /* BuildInfo.swift in Sources */,
 				F4DDB3C82079A209004781AE /* Carthage.swift in Sources */,
