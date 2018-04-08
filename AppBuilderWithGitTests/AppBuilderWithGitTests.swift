@@ -19,6 +19,11 @@ class AppBuilderWithGitTests: XCTestCase {
         XCTAssertFalse(existCommand("skjdlfkjsaldfjalkj"))
     }
     
+    func testCommandPath() {
+        
+        XCTAssertEqual(commandPath("carthage")?.path, "/usr/local/bin/carthage")
+        XCTAssertEqual(commandPath("pod")?.path, "/usr/local/bin/pod")
+    }
     
     func testMatch() {
         
@@ -45,7 +50,6 @@ class AppBuilderWithGitTests: XCTestCase {
         XCTAssertNotNil(findFile(pattern: "PkgInfo", in: bundleURL, depth: 3))
         
         XCTAssertNil(findFile(pattern: "pkgInfo", in: bundleURL, depth: 3))
-
         
     }
 }
