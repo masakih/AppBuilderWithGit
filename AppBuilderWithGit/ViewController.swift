@@ -112,6 +112,8 @@ extension ViewController {
                 case .none:
                     self.message = "Finish cloning"
                     
+                    self.carthage(gitCloner.repository)
+                    
                     self.build(gitCloner.repository)
                     
                 case let .gitError(stat, mess):
@@ -123,6 +125,15 @@ extension ViewController {
             }
             
         }
+    }
+    
+    private func carthage(_ url: URL) {
+        
+        self.message = "Checking Carthage"
+        
+        let carthage = Carthage(url)
+        
+        carthage.execute()
     }
     
     private func build(_ url: URL) {
