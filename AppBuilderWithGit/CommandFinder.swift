@@ -10,7 +10,7 @@ import Foundation
 
 func existCommand(_ commandName: String) -> Bool {
     
-    let which = Process() <<< "/usr/bin/which" <<< [commandName]
+    let which = Process() <<< ExcutableURL(fileURLWithPath: "/usr/bin/which") <<< [commandName]
     
     if let currentPath = which.environment?["PATH"] {
         
@@ -26,7 +26,7 @@ func existCommand(_ commandName: String) -> Bool {
 
 func commandPath(_ commandName: String) -> URL? {
     
-    let which = Process() <<< "/usr/bin/which" <<< [commandName]
+    let which = Process() <<< ExcutableURL(fileURLWithPath: "/usr/bin/which") <<< [commandName]
     
     if let currentPath = which.environment?["PATH"] {
         
@@ -42,6 +42,7 @@ func commandPath(_ commandName: String) -> URL? {
             let lines = output.lines
         
             guard let path = lines.first else {
+                
                 return nil
             }
             

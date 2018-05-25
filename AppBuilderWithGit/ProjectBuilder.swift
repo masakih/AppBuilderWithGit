@@ -33,7 +33,6 @@ final class ProjectBuilder {
         }
         
         self.info = info
-        
     }
     
     var productURL: URL { return info.productURL }
@@ -52,8 +51,10 @@ final class ProjectBuilder {
                 throw ProjectBuilderError.other("URL is Invalid.")
         }
         
-        let xcodebuild = Process() <<< builderURL.path <<< info.arguments
-        xcodebuild.currentDirectoryPath = info.projectURL.path
+        let xcodebuild = Process() <<< ExcutableURL(url: builderURL)
+            <<< info.arguments
+            <<< info.projectURL
+        
         xcodebuild >>> { stdout, stderr in
             
             let log = LogStocker("xcodebuild.log")
@@ -68,6 +69,4 @@ final class ProjectBuilder {
             throw ProjectBuilderError.commandFail
         }
     }
-
-    
 }

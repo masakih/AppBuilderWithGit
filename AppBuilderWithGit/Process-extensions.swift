@@ -14,19 +14,38 @@ struct Output {
     private let fileHandle: FileHandle
     
     init(fileHandle: FileHandle) {
+        
         self.fileHandle = fileHandle
     }
     
     var data: Data {
+        
         return fileHandle.readDataToEndOfFile()
     }
     
     var string: String? {
+        
         return String(data: data, encoding: .utf8)
     }
     
     var lines: [String] {
+        
         return string?.components(separatedBy: "\n") ?? []
+    }
+}
+
+struct ExcutableURL {
+    
+    let url: URL
+    
+    init(fileURLWithPath path: String) {
+        
+        url = URL(fileURLWithPath: path)
+    }
+    
+    init(url: URL) {
+        
+        self.url = url
     }
 }
 
@@ -38,9 +57,17 @@ precedencegroup ArgumentPrecedence {
 infix operator <<< : ArgumentPrecedence
 
 /// Processにexecutable pathを設定する。
-func <<< (lhs: Process, rhs: String) -> Process {
+func <<< (lhs: Process, rhs: ExcutableURL) -> Process {
     
-    lhs.launchPath = rhs
+    if #available(macOS 10.13, *) {
+        
+        lhs.executableURL = rhs.url
+        
+    } else {
+        
+        lhs.launchPath = rhs.url.path
+    }
+    
     return lhs
 }
 
@@ -48,6 +75,22 @@ func <<< (lhs: Process, rhs: String) -> Process {
 func <<< (lhs: Process, rhs: [String]) -> Process {
     
     lhs.arguments = rhs
+    
+    return lhs
+}
+
+/// Current directoryを設定する。
+func <<< (lhs: Process, rhs: URL) -> Process {
+    
+    if #available(macOS 10.13, *) {
+        
+        lhs.currentDirectoryURL = rhs
+        
+    } else {
+        
+        lhs.currentDirectoryPath = rhs.path
+    }
+    
     return lhs
 }
 

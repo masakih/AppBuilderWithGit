@@ -61,8 +61,9 @@ final class Carthage {
             throw CarthageError.commandNotFound
         }
         
-        let carthage = Process() <<< carthageURL.path <<< ["bootstrap"]
-        carthage.currentDirectoryPath = cartfile.deletingLastPathComponent().path
+        let carthage = Process() <<< ExcutableURL(url: carthageURL)
+            <<< ["bootstrap"]
+            <<< cartfile.deletingLastPathComponent()
         
         carthage >>> { output, error in
             

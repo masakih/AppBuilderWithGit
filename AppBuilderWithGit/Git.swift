@@ -87,9 +87,9 @@ final class Git {
             throw GitError.other("URL is invalid")
         }
         
-        let git = Process() <<< gitURL.path <<< args
-        
-        git.currentDirectoryPath = workingURL.path
+        let git = Process() <<< ExcutableURL(url: gitURL)
+            <<< args
+            <<< workingURL
         
         let errorString = git >>> { (stdout, stderr) -> String in
             
@@ -108,7 +108,6 @@ final class Git {
             
             throw GitError.gitError(git.terminationStatus, errorString)
         }
-        
     }
     
     private func clone() throws {
@@ -177,6 +176,5 @@ final class Git {
         }
         
         return url.lastPathComponent
-        
     }
 }

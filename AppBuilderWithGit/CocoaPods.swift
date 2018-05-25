@@ -61,8 +61,9 @@ final class CocoaPods {
             throw CarthageError.commandNotFound
         }
         
-        let pod = Process() <<< podURL.path <<< ["install"]
-        pod.currentDirectoryPath = podfile.deletingLastPathComponent().path
+        let pod = Process() <<< ExcutableURL(url: podURL)
+            <<< ["install"]
+            <<< podfile.deletingLastPathComponent()
         
         pod >>> { output, error in
             
