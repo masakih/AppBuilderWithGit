@@ -30,6 +30,7 @@ func findFile(pattern: String, in url: URL, depth: Int = 1) -> URL? {
     guard let contents = try? FileManager.default.contentsOfDirectory(at: url,
                                                                       includingPropertiesForKeys: [.isDirectoryKey])
         else {
+            
             return nil
     }
     

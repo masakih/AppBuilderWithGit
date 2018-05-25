@@ -39,13 +39,11 @@ struct BuildInfo {
     
     init?(projectURL: URL) {
         
-        guard let projectFileURL = find(in: projectURL)
-            else { return nil }
+        guard let projectFileURL = find(in: projectURL) else { return nil }
         
         self.projectURL = projectURL
         
-        guard let type = ProjectType(projectFileURL: projectFileURL)
-            else { return nil }
+        guard let type = ProjectType(projectFileURL: projectFileURL) else { return nil }
         
         switch type {
             

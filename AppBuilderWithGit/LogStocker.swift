@@ -25,7 +25,6 @@ private func nameWithDate(_ name: String) -> String {
     formatter.dateFormat = "yyyy-MM-dd-HH-mm-ss-A"
     
     return formatter.string(from: Date()) + "-" + name
-    
 }
 
 final class LogStocker {
@@ -36,8 +35,7 @@ final class LogStocker {
         
         do {
             
-            let datename = nameWithDate(name)
-            guard let url = fileURL(for: datename) else { return nil }
+            guard let url = fileURL(for: nameWithDate(name)) else { return nil }
             
             try Data().write(to: url)
             

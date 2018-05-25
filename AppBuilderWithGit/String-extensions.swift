@@ -13,6 +13,7 @@ extension String {
     func match(_ pattern: String, options: NSRegularExpression.Options = []) -> Bool {
         
         guard let regex = try? NSRegularExpression(pattern: pattern, options: options) else {
+            
             return false
         }
         

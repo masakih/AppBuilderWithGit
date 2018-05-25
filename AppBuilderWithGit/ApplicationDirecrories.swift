@@ -48,7 +48,6 @@ func createDirectory(_ url: URL) -> Bool {
     } catch {
         
         return false
-        
     }
 }
 
