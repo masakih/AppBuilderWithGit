@@ -47,23 +47,20 @@ final class Git {
             
             return
             
-        } catch {
+        } catch let error as GitError {
             
-            guard let e = error as? GitError else {
+            if case let .gitError(stat, _) = error, stat == 128 {
                 
-                completeHandler?(GitError.other("Unknown Error: \(error)"))
-                return
-            }
-            
-            switch e {
-                
-            case let .gitError(stat, _) where stat == 128:
                 tryPull(completeHandler: completeHandler)
                 
-            default:
-                completeHandler?(e)
+            } else {
+                
+                completeHandler?(error)
             }
             
+        } catch {
+            
+            completeHandler?(GitError.other("Unknown Error: \(error)"))
         }
         
     }
@@ -157,14 +154,13 @@ final class Git {
             
             completeHandler?(GitError.none)
             
+        } catch let error as GitError {
+            
+            completeHandler?(error)
+            
         } catch {
             
-            switch error {
-                
-            case let e as GitError: completeHandler?(e)
-                
-            default: completeHandler?(GitError.other("Unknown Error: \(error)"))
-            }
+            completeHandler?(GitError.other("Unknown Error: \(error)"))
         }
     }
     
