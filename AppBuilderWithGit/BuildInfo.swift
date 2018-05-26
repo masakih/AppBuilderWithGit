@@ -48,8 +48,8 @@ struct BuildInfo {
         switch type {
             
         case .xcworkspace:
-            self.buildURL = ApplicationDirecrories.support.appendingPathComponent(BuildInfo.buildDir)
-            self.productURL = buildURL.appendingPathComponent("Build/Products/Release")
+            self.buildURL = URL(fileURLWithPath: BuildInfo.buildDir, relativeTo: ApplicationDirecrories.support)
+            self.productURL = URL(fileURLWithPath: "Build/Products/Release", relativeTo: buildURL)
             self.arguments = [
                 "-workspace",
                 projectFileURL.lastPathComponent,
@@ -62,8 +62,8 @@ struct BuildInfo {
             ]
             
         case .xcodeproj:
-            self.buildURL = projectURL.appendingPathComponent("build")
-            self.productURL = buildURL.appendingPathComponent("Release")
+            self.buildURL = URL(fileURLWithPath: "build", relativeTo: projectURL)
+            self.productURL = URL(fileURLWithPath: "Release", relativeTo: buildURL)
             self.arguments = ["-configuration", "Release"]
         }
     }

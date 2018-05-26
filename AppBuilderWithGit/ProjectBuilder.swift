@@ -39,10 +39,12 @@ final class ProjectBuilder {
     
     func build() throws {
         
-        let xcodeURL = NSApplication.appDelegate.xcodeURL
-        guard let builderURL = xcodeURL?.appendingPathComponent("/Contents/Developer/usr/bin/xcodebuild") else {
-            
-            throw ProjectBuilderError.commandNotFound
+        let builderURL = URL(fileURLWithPath: "Contents/Developer/usr/bin/xcodebuild",
+                         relativeTo: NSApplication.appDelegate.xcodeURL)
+        guard let xcodebuildReachable = try? builderURL.checkResourceIsReachable(),
+            xcodebuildReachable else {
+                
+                throw ProjectBuilderError.commandNotFound
         }
         
         guard let reachable = try? info.projectURL.checkResourceIsReachable(),

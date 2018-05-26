@@ -10,7 +10,7 @@ import Foundation
 
 private func fileURL(for name: String) -> URL? {
     
-    let base = ApplicationDirecrories.support.appendingPathComponent("Logs")
+    let base = URL(fileURLWithPath: "Logs", relativeTo: ApplicationDirecrories.support)
     guard checkDirectory(base) else {
         
         return base.appendingPathComponent(name)

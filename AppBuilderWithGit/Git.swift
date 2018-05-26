@@ -26,7 +26,8 @@ final class Git {
     
     var repository: URL {
         
-        return ApplicationDirecrories.support.appendingPathComponent(repositoryName)
+        return URL(fileURLWithPath: repositoryName,
+                   relativeTo: ApplicationDirecrories.support)
     }
     
     init(_ url: URL) {
@@ -62,7 +63,6 @@ final class Git {
             
             completeHandler?(GitError.other("Unknown Error: \(error)"))
         }
-        
     }
     
     private func excuteGit(workingURL: URL, args: [String]) throws {
@@ -72,8 +72,10 @@ final class Git {
             throw GitError.other("Iligal arguments")
         }
         
-        let xcodeURL = NSApplication.appDelegate.xcodeURL
-        guard let gitURL = xcodeURL?.appendingPathComponent("/Contents/Developer/usr/bin/git") else {
+        let gitURL = URL(fileURLWithPath: "Contents/Developer/usr/bin/git",
+                         relativeTo: NSApplication.appDelegate.xcodeURL)
+        guard let gitReachable = try? gitURL.checkResourceIsReachable(),
+            gitReachable else {
             
             throw GitError.other("git is not found.")
         }
@@ -128,20 +130,16 @@ final class Git {
     
     private func submoduleUpdate(shouldInit: Bool = false) throws {
         
-        let workingURL = ApplicationDirecrories.support.appendingPathComponent(repositoryName)
-        
         let args = shouldInit ? ["submodule", "update", "-i"] : ["submodule", "update"]
         
-        try excuteGit(workingURL: workingURL, args: args)
+        try excuteGit(workingURL: repository, args: args)
     }
     
     private func pull() throws {
         
-        let workingURL = ApplicationDirecrories.support.appendingPathComponent(repositoryName)
-        
         let args = ["pull"]
         
-        try excuteGit(workingURL: workingURL, args: args)
+        try excuteGit(workingURL: repository, args: args)
     }
     
     private func tryPull(completeHandler: ((GitError) -> ())?) {
